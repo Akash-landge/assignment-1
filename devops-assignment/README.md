@@ -1,12 +1,11 @@
-# DevOps Assignment - Scraper + Flask Web Server
+# 🛠 DevOps Assignment - Web Scraper with Node.js & Python Flask
 
-This project uses **Node.js with Puppeteer** to scrape a website and **Python with Flask** to serve the scraped data as JSON.
+This project demonstrates a multi-stage Docker setup that:
+- Uses **Node.js with Puppeteer** to scrape a webpage.
+- Uses **Python with Flask** to serve the scraped data.
+- Keeps the final Docker image lean using a multi-stage build.
 
 ---
 
-## 🚀 How to Use
+## 📁 Project Structure
 
-### 📦 Step 1: Build the Docker Image
-
-```bash
-docker build -t scraper-flask-app .
