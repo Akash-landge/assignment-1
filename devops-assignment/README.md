@@ -1,65 +1,56 @@
 🛠 DevOps Assignment - Web Scraper with Node.js & Python Flask
-This project demonstrates a multi-stage Docker setup that:
+This project demonstrates a multi-stage Docker setup to:
 
-Uses Node.js with Puppeteer to scrape a webpage.
+Scrape a webpage using Node.js with Puppeteer.
 
-Uses Python with Flask to serve the scraped data.
+Serve the scraped data using Python with Flask.
 
-Keeps the final Docker image lean using a multi-stage build.
+Optimize the Docker image using a multi-stage build.
 
-📁 Project Structure
+📂 Project Structure
 devops-assignment/
-├── scrape.js          # Node.js script using Puppeteer
+├── scrape.js          # Node.js script for web scraping
 ├── package.json       # Node.js dependencies
-├── server.py          # Flask server to display JSON
+├── server.py          # Flask server for displaying JSON
 ├── requirements.txt   # Python dependencies
 ├── Dockerfile         # Multi-stage Docker build
 └── README.md          # Project documentation
 ⚙️ Prerequisites
-Before you begin, make sure you have:
+Ensure you have:
 
 Docker installed
 
-Internet access (to scrape a live website)
+Internet access to scrape a live website
 
-🔧 Setup Instructions
-1. Clone the Repository
+🔨 Setup Instructions
+Step 1: Clone the Repository
 bash
 git clone https://github.com/<your-username>/assignment-1.git
 cd assignment-1/devops-assignment
-2. Update the URL to Scrape (Optional)
-You can pass any URL using an environment variable when running the container.
+Step 2: Update the URL to Scrape (Optional)
+Pass any URL using the SCRAPE_URL environment variable when running the container.
 
-🏗️ Build the Docker Image
-Use the Dockerfile to create a multi-stage image:
-
+🏗️ Build and Run Instructions
+Step 1: Build the Docker Image
 bash
 docker build -t scraper-flask-app .
-This will:
+Scrapes a webpage using Node.js and Puppeteer.
 
-Use Node.js to scrape a webpage using Puppeteer.
+Copies the scraped data into a lightweight Python image.
 
-Copy the scraped data (JSON) into a lightweight Python image.
+Sets up a Flask server to host the data.
 
-Set up a Flask server to host the data.
-
-🚀 Run the Container
-Run the container and specify the URL to scrape:
-
+Step 2: Run the Container
 bash
 docker run -p 5000:5000 -e SCRAPE_URL=https://example.com scraper-flask-app
-Replace https://example.com with any URL you'd like to scrape.
+Replace https://example.com with the URL you want to scrape.
 
 🌐 Access the Scraped Data
-If you're running locally:
-Open your browser and visit: http://localhost:5000
+If running locally:
+Visit: http://localhost:5000
 
-If you're running on a remote server (like AWS EC2):
-Open:
-
-bash
-http://<your-ec2-public-ip>:5000
-⚠️ Make sure port 5000 is open in your firewall/security group!
+If running on a remote server (e.g., AWS EC2):
+Visit: http://<your-ec2-public-ip>:5000 > ⚠️ Ensure port 5000 is open in your firewall/security group.
 
 💡 Example Output
 json
@@ -68,15 +59,15 @@ json
   "heading": "Example Domain"
 }
 🧰 Technologies Used
-Node.js + Puppeteer – for headless browser scraping
+Node.js + Puppeteer – Headless browser for web scraping
 
-Python + Flask – for serving the data
+Python + Flask – Backend for serving scraped data
 
-Docker – for containerization and multi-stage build
+Docker – Containerization with multi-stage builds
 
-✅ Tips
-This setup runs the scraper once during the build.
+📢 Tips
+The scraper runs once during the build process.
 
-The Flask server simply displays the scraped output (static content).
+Flask serves the scraped output (static content).
 
 Make sure the target URL is publicly accessible.
