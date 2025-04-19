@@ -16,7 +16,7 @@ devops-assignment/
 ├── Dockerfile         # Multi-stage Docker build
 └── README.md          # Project documentation
 ⚙️ Prerequisites
-Ensure you have:
+Make sure you have:
 
 Docker installed
 
@@ -34,11 +34,13 @@ Pass any URL using the SCRAPE_URL environment variable when running the containe
 Step 1: Build the Docker Image
 bash
 docker build -t scraper-flask-app .
-Scrapes a webpage using Node.js and Puppeteer.
+This will:
 
-Copies the scraped data into a lightweight Python image.
+Scrape a webpage using Node.js and Puppeteer.
 
-Sets up a Flask server to host the data.
+Copy the scraped data into a lightweight Python image.
+
+Set up a Flask server to host the data.
 
 Step 2: Run the Container
 bash
@@ -50,7 +52,7 @@ If running locally:
 Visit: http://localhost:5000
 
 If running on a remote server (e.g., AWS EC2):
-Visit: http://<your-ec2-public-ip>:5000 > ⚠️ Ensure port 5000 is open in your firewall/security group.
+Visit: http://<your-ec2-public-ip>:5000 > ⚠️ Make sure port 5000 is open in your firewall/security group!
 
 💡 Example Output
 json
@@ -70,4 +72,4 @@ The scraper runs once during the build process.
 
 Flask serves the scraped output (static content).
 
-Make sure the target URL is publicly accessible.
+Ensure the target URL is publicly accessible.
