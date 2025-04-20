@@ -1,0 +1,54 @@
+pipeline  {
+    agent any
+
+    environment {
+        DOCKER_IMAGES = "myapp:${BUILD_NUMBER}"
+        }
+
+    stages {
+        stage ('pull') {
+           steps {
+            git 'https://github.com/Akash-landge/k8s-kind-voting-app1.git'
+            }
+        }
+
+        stage ('build') {
+            steps {
+                sh 'mvn clean install'
+                }
+            }
+        
+        stage ('BUILD_DOCKER_IMAGES') {
+            steps {
+            sh 'docker build -t myapp:${BUILD_NUMBER} .'
+            }
+        }
+
+        stage ('push_to_docker_registry') {
+            steps {
+             withCredentials([usernamePassword(credentialsId: 'docker-cred-id', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh """
+                    echo $PASSWORD | docker login -u $USERNAME --password-stdin
+                    docker push myapp:${BUILD_NUMBER}
+                    """
+            }
+        }
+
+        stage ('deploy to k8s') {
+            steps { 
+             sh 'kubectl set image deployment/myapp-deployment myapp-container=myapp:${BUILD_NUMBER} --record'
+            }
+        }
+
+        post  {
+            success {
+                echo "kay baghatay pipeline successfully run jhali!"
+            }
+            failure { 
+                echo "locha jhala pipeline parat check kara!"
+            }
+        }
+    }
+}
+
+    
